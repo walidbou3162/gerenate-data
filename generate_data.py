@@ -90,19 +90,19 @@ spark = SparkSession.builder \
     .getOrCreate()
 
 products = spark.read.csv(
-    "products.csv", header=True, mode="DROPMALFORMED"
+    "file:/databricks/driver/products.csv", header=True, mode="DROPMALFORMED"
 )
 products.show()
-products.write.parquet("products_parquet", mode="overwrite")
+products.write.parquet("file:/databricks/driver/products_parquet", mode="overwrite")
 
 sales = spark.read.csv(
-    "sales.csv", header=True, mode="DROPMALFORMED"
+    "file:/databricks/driver/sales.csv", header=True, mode="DROPMALFORMED"
 )
 sales.show()
-sales.repartition(200, col("product_id")).write.parquet("sales_parquet", mode="overwrite")
+sales.repartition(200, col("product_id")).write.parquet("file:/databricks/driver/sales_parquet", mode="overwrite")
 
 sellers = spark.read.csv(
-    "sellers.csv", header=True, mode="DROPMALFORMED"
+    "file:/databricks/driver/sellers.csv", header=True, mode="DROPMALFORMED"
 )
 sellers.show()
-sellers.write.parquet("sellers_parquet", mode="overwrite")
+sellers.write.parquet("file:/databricks/driver/sellers_parquet", mode="overwrite")
